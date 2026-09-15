@@ -1,0 +1,482 @@
+/* ============================================================
+   LABORATORY ASSET MANAGEMENT SYSTEM — DASHBOARD STYLES
+   ============================================================
+   
+   TABLE OF CONTENTS
+   ────────────────
+   1. CSS Variables
+   2. Base Styles
+   3. Login Screen Overlay
+   4. Navbar & Brand
+   5. Navigation Tabs
+   6. Role-Based Visibility
+   7. Status Badges
+   8. Cards & Equipment Grid
+   9. Tables & Data Display
+   10. Buttons & Form Elements
+   11. Modal Dialogues
+   12. Equipment Management
+   13. Toast & Notifications
+   14. Utility Classes
+   15. Dark Mode
+   ============================================================ */
+
+/* ============================================================
+   1. CSS VARIABLES
+   ============================================================ */
+:root {
+    --primary: #0d6efd;
+    --primary-dark: #0a58ca;
+    --secondary: #6c757d;
+    --success: #198754;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --info: #0dcaf0;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --border-radius: 0.5rem;
+    --border-radius-lg: 1rem;
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================
+   2. BASE STYLES
+   ============================================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   3. LOGIN SCREEN OVERLAY
+   ============================================================ */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0d6efd 0%, #6610f4 100%);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.login-card {
+    max-width: 420px;
+    width: 90%;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    animation: slideUp 0.6s ease-out;
+}
+
+.login-card .card-header {
+    border: none;
+    padding: 2rem 1.5rem;
+}
+
+.login-card .card-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.login-card .card-header small {
+    font-size: 0.85rem;
+}
+
+.login-card .card-body {
+    padding: 1.75rem;
+    background-color: #fff;
+}
+
+.login-card .card-footer {
+    border: none;
+    background-color: var(--light);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+}
+
+/* Login form error states */
+.login-overlay .form-control.is-invalid,
+.login-overlay .form-select.is-invalid {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.login-overlay .invalid-feedback {
+    display: block;
+    color: var(--danger);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.login-overlay .form-label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+#loginRole {
+    border-radius: 0.4rem;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   4. NAVBAR & BRAND
+   ============================================================ */
+.navbar {
+    border-bottom: 2px solid var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+#current-role-badge {
+    font-size: 0.85rem;
+}
+
+/* ============================================================
+   5. NAVIGATION TABS
+   ============================================================ */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 1.5rem;
+}
+
+.nav-link {
+    color: var(--secondary);
+    font-weight: 500;
+    border: 1px solid transparent;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    border-color: #dee2e6 #dee2e6 #adb5d9;
+    color: var(--primary-dark);
+}
+
+.nav-link.active {
+    font-weight: 600;
+    color: var(--primary);
+    border-color: #dee2e6 #dee2e6 var(--primary);
+    background-color: #fff;
+}
+
+/* ============================================================
+   6. ROLE-BASED VISIBILITY
+   ============================================================ */
+.admin-only { display: none; }
+.staff-only { display: none; }
+
+/* ============================================================
+   7. STATUS BADGES
+   ============================================================ */
+
+/* Equipment Status */
+.badge-available,
+.badge-approved {
+    background-color: var(--success);
+    color: #fff;
+}
+
+.badge-borrowed {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.badge-under-maintenance {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+.badge-damaged {
+    background-color: #6610f4;
+    color: #fff;
+}
+
+/* Request Status */
+.badge-pending {
+    background-color: var(--warning);
+    color: #212529;
+}
+
+.badge-rejected,
+.badge-overdue {
+    background-color: var(--danger);
+    color: #fff;
+}
+
+.badge-released {
+    background-color: var(--info);
+    color: #212529;
+}
+
+.badge-returned,
+.badge-closed {
+    background-color: var(--success);
+    color: #fff;
+}
+
+/* Badge base in tables */
+.table .badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.6em;
+}
+
+/* ============================================================
+   8. CARDS & EQUIPMENT GRID
+   ============================================================ */
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.card-header {
+    border-bottom: 1px solid #e9ecef;
+    background-color: #fff;
+}
+
+.equipment-card {
+    height: 100%;
+}
+
+.equipment-card .card-body {
+    padding: 1rem;
+}
+
+.equipment-card .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.equipment-card .card-subtitle {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+#equipment-list {
+    row-gap: 1rem;
+}
+
+/* ============================================================
+   9. TABLES & DATA DISPLAY
+   ============================================================ */
+.table th {
+    background-color: #e9ecef;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 0;
+    padding: 0.75rem 0.5rem;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 0.6rem 0.5rem;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.table-responsive {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+/* Action Column */
+.workflow-actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Empty state */
+.text-center.text-muted.py-4 {
+    font-style: italic;
+}
+
+/* ============================================================
+   10. BUTTONS & FORM ELEMENTS
+   ============================================================ */
+.btn-xs {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.2rem;
+}
+
+.btn-sm {
+    border-radius: 0.3rem;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.form-text {
+    font-size: 0.8rem;
+}
+
+/* ============================================================
+   11. MODAL DIALOGUES
+   ============================================================ */
+.modal-content {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 1.25rem;
+}
+
+.modal-body {
+    padding: 1.25rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 0.75rem 1.25rem;
+}
+
+.modal-dialog {
+    max-width: 500px;
+}
+
+.modal-dialog-centered {
+    min-height: calc(100% - 1rem);
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.modal-lg {
+    max-width: 700px;
+}
+
+/* ============================================================
+   12. EQUIPMENT MANAGEMENT (Admin)
+   ============================================================ */
+.page-header {
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.add-equipment-btn {
+    border-radius: 0.4rem;
+    font-weight: 500;
+}
+
+/* Equipment status select styling */
+#equipmentStatus {
+    border-radius: 0.4rem;
+}
+
+/* ============================================================
+   13. TOAST & NOTIFICATIONS
+   ============================================================ */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1080;
+    max-width: 400px;
+}
+
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 0.5rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.5rem 0.75rem;
+}
+
+/* ============================================================
+   14. UTILITY CLASSES
+   ============================================================ */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.gap-3 {
+    gap: 1rem !important;
+}
+
+.mt-3 { margin-top: 1rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+
+/* ============================================================
+   15. DARK MODE (Optional)
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a2e;
+        color: #e0e0e0;
+    }
+
+    .card {
+        background-color: #16213e;
+    }
+
+    .table th {
+        background-color: #0f3460;
+    }
+
+    .nav-tabs {
+        border-bottom-color: #333;
+    }
+
+    .login-card .card-body,
+    .login-card .card-footer {
+        background-color: #0f3460;
+    }
+}
